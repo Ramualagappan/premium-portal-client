@@ -33,7 +33,8 @@
                                 <div class="form-group col">
                                     <label class="form-label" for="dob">Date of Birth</label>
 
-                                    <input class="form-control" formControlName="dob" type="date" id="dob" (change)="CalculateAge();" max="myDateValue" required/>
+                                    <input class="form-control" formControlName="dob" type="date" id="dob"
+                                        (change)="CalculateAge();" max="myDateValue" required />
 
                                     <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
                                         <div *ngIf="f.dob.errors.required">Date of Birth is required</div>
@@ -46,7 +47,8 @@
 
                                     <select formControlName="occupation" class="form-control">
                                         <option>Select</option>
-                                        <option [value]="item.rating" *ngFor="let item of occupationList">{{item.occupation}}</option>
+                                        <option [value]="item.rating" *ngFor="let item of occupationList">
+                                            {{item.occupation}}</option>
                                     </select>
 
 
@@ -65,26 +67,25 @@
                                     <div *ngIf="submitted && f.deathsuminsured.errors" class="invalid-feedback">
                                         <div *ngIf="f.deathsuminsured.errors.required">Death – Sum Insured is required
                                         </div>
-                                        <!-- <div *ngIf="f.deathsuminsured.errors.minlength">deathsuminsured must be at least 6 characters</div> -->
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-row">  
-                            <div class="form-group col">
-                                <div class="row">
-                                    <div class="col-md-3">
+                            <div class="form-row">
+                                <div class="form-group col">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <button [disabled]="loading" class="btn btn-primary">
+                                                <span *ngIf="loading"
+                                                    class="spinner-border spinner-border-sm mr-1"></span>
+                                                Calculate
+                                            </button>
+                                        </div>
+                                        <div class="col-md-9"> <button (click)="resetForm()"
+                                                class="btn btn-secondary float-left">Reset</button></div>
+                                    </div>
 
-                                     
-                                <button [disabled]="loading" class="btn btn-primary">
-                                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                                    Calculate
-                                </button>  
+                                </div>
                             </div>
-                            <div class="col-md-9">   <button (click)="resetForm()" class="btn btn-secondary float-left">Reset</button></div>
-                        </div>
-                               
-                            </div>
-                        </div>
                         </form>
                     </div>
                     <div class="col-md-6">
@@ -95,23 +96,25 @@
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col mr-2">
-                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    <div
+                                                        class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                         Total Premium</div>
-                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">${{totalPremiumAmount}}</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                        ${{totalPremiumAmount}}</div>
                                                 </div>
                                                 <div class="col-auto">
                                                     <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>  
+                                    </div>
                                 </span>
                             </div>
                         </div>
-                       
-                         
 
-                       
+
+
+
 
                     </div>
                 </div>
