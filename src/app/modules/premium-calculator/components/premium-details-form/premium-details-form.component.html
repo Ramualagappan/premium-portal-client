@@ -1,0 +1,123 @@
+<div class="container premium-details-form" data-layout="container">
+    <div class="content">
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <h5 class="mb-0">Premium Calculator</h5>
+            </div>
+            <div class="card-body bg-light">
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6 border-right-line">
+
+                        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                            <div class="form-row">
+                                <div class="form-group col">
+                                    <label for="name">Name</label>
+                                    <input type="text" formControlName="name" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                        <div *ngIf="f.name.errors.required">Name is required</div>
+                                    </div>
+                                </div>
+                                <div class="form-group col">
+                                    <label for="age">Age</label>
+                                    <input type="number" min="0" readonly formControlName="age" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.age.errors }" />
+                                    <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
+                                        <div *ngIf="f.age.errors.required">Age is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+
+                                <div class="form-group col">
+                                    <label class="form-label" for="dob">Date of Birth</label>
+
+                                    <input class="form-control" formControlName="dob" type="date" id="dob" (change)="CalculateAge();" max="myDateValue" required/>
+
+                                    <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
+                                        <div *ngIf="f.dob.errors.required">Date of Birth is required</div>
+                                    </div>
+                                </div>
+                                <div class="form-group col">
+                                    <label for="occupation">Occupation</label>
+                                    <!-- <input type="text" formControlName="occupation" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.occupation.errors }" /> -->
+
+
+                                    <select formControlName="occupation" class="form-control">
+                                        <option>Select</option>
+                                        <option [value]="item.rating" *ngFor="let item of occupationList">{{item.occupation}}</option>
+                                    </select>
+
+
+                                    <div *ngIf="submitted && f.occupation.errors" class="invalid-feedback">
+                                        <div *ngIf="f.occupation.errors.required">Occupation is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col">
+                                    <label for="deathsuminsured">
+                                        Death – Sum Insured
+                                    </label>
+                                    <input type="number" min="0" formControlName="deathsuminsured" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.deathsuminsured.errors }" />
+                                    <div *ngIf="submitted && f.deathsuminsured.errors" class="invalid-feedback">
+                                        <div *ngIf="f.deathsuminsured.errors.required">Death – Sum Insured is required
+                                        </div>
+                                        <!-- <div *ngIf="f.deathsuminsured.errors.minlength">deathsuminsured must be at least 6 characters</div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">  
+                            <div class="form-group col">
+                                <div class="row">
+                                    <div class="col-md-3">
+
+                                     
+                                <button [disabled]="loading" class="btn btn-primary">
+                                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                    Calculate
+                                </button>  
+                            </div>
+                            <div class="col-md-9">   <button (click)="resetForm()" class="btn btn-secondary float-left">Reset</button></div>
+                        </div>
+                               
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-xl-6 col-md-6 mb-4">
+                                <span *ngIf="totalPremiumAmount">
+                                    <div class="card border-left-primary shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                        Total Premium</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">${{totalPremiumAmount}}</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </span>
+                            </div>
+                        </div>
+                       
+                         
+
+                       
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
