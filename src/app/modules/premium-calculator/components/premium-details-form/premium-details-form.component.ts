@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { AccountService, AlertService } from '../../../../services';
+import { PremiumService, AlertService } from '../../../../services';
 @Component({
   selector: 'app-premium-details-form',
   templateUrl: './premium-details-form.component.html',
@@ -14,17 +14,17 @@ export class PremiumDetailsFormComponent implements OnInit {
   loading = false;
   submitted = false;
   myDateValue: string;
-  totalPremiumAmount:any;
+  totalPremiumAmount: any;
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private accountService: AccountService,
+    private premiumService: PremiumService,
     private alertService: AlertService
   ) { }
 
   ngOnInit() {
-   
+
     this.myDateValue = new Date().toISOString().slice(0, 10);
     this.getOccupationDetails();
 
@@ -52,18 +52,17 @@ export class PremiumDetailsFormComponent implements OnInit {
     }
 
     this.loading = true;
-      this.calculatePremium();
-     
+    this.calculatePremium();
+
   }
 
 
-  private getOccupationDetails()
-  {
-    this.accountService.getOccupationDetails()
-    .pipe()
+  private getOccupationDetails() {
+    this.premiumService.getOccupationDetails()
+      .pipe()
       .subscribe(
         data => {
-          this.occupationList=data;
+          this.occupationList = data;
         },
         error => {
           this.alertService.error(error);
@@ -72,11 +71,11 @@ export class PremiumDetailsFormComponent implements OnInit {
   }
 
   private calculatePremium() {
-    this.accountService.register(this.form.value)
+    this.premiumService.register(this.form.value)
       .pipe(first())
       .subscribe(
         data => {
-          this.totalPremiumAmount=data;
+          this.totalPremiumAmount = data;
           this.alertService.success('User added successfully', { keepAfterRouteChange: true });
           this.loading = false;
         },
@@ -85,7 +84,7 @@ export class PremiumDetailsFormComponent implements OnInit {
           this.loading = false;
         });
   }
- 
+
   CalculateAge() {
     if (this.form.controls.dob.value) {
       let newDate = new Date(this.form.controls.dob.value);
@@ -96,8 +95,16 @@ export class PremiumDetailsFormComponent implements OnInit {
     }
   }
 
-  resetForm(){
+  onOccupationChange(event) {
+    const value = event.target.value;
+
+    if (this.form.valid) {
+      this.calculatePremium();
+    }
+    console.log(value);
+  }
+  resetForm() {
     this.form.reset();
-    this.totalPremiumAmount=null;
+    this.totalPremiumAmount = null;
   }
 }

@@ -3,7 +3,7 @@
 
         <div class="card mb-3">
             <div class="card-header">
-                <h5 class="mb-0">Premium Calculator</h5>
+                <h5 class="mb-0">Monthly Premium Calculator</h5>
             </div>
             <div class="card-body bg-light">
                 <div class="row g-3 mb-3">
@@ -42,15 +42,13 @@
                                 </div>
                                 <div class="form-group col">
                                     <label for="occupation">Occupation</label>
-                                    <!-- <input type="text" formControlName="occupation" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.occupation.errors }" /> -->
 
-
-                                    <select formControlName="occupation" class="form-control">
+                                    <select formControlName="occupation" class="form-control"
+                                        (change)='onOccupationChange($event)'>
                                         <option>Select</option>
                                         <option [value]="item.rating" *ngFor="let item of occupationList">
                                             {{item.occupation}}</option>
                                     </select>
-
 
                                     <div *ngIf="submitted && f.occupation.errors" class="invalid-feedback">
                                         <div *ngIf="f.occupation.errors.required">Occupation is required</div>
@@ -98,7 +96,7 @@
                                                 <div class="col mr-2">
                                                     <div
                                                         class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                        Total Premium</div>
+                                                        Monthly Premium</div>
                                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                         ${{totalPremiumAmount}}</div>
                                                 </div>
