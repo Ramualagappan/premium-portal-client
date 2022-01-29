@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:4000'
+  apiUrl: 'https://premiumcalculator20220129221231.azurewebsites.net/premiumcalculator'
 };
