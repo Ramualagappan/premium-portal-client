@@ -71,7 +71,7 @@ export class PremiumDetailsFormComponent implements OnInit {
   }
 
   private calculatePremium() {
-    this.premiumService.register(this.form.value)
+    this.premiumService.calculatePremium(this.form.value)
       .pipe(first())
       .subscribe(
         data => {
